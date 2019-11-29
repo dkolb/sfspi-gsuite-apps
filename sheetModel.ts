@@ -39,7 +39,7 @@ export class Member {
   zip: string
   birthday: string
 
-  constructor(row) {
+  constructor(row: any[]) {
     this.pseudonym = row[0]
     this.legalName = row[1]
     this.level = row[2]

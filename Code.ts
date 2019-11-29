@@ -213,11 +213,3 @@ function generateDetailedAttendanceReport() {
   //Show the modal.
   ui.showModalDialog(modalContent.evaluate(), 'Document Ready')
 }
-
-function SFSPITEST() {
-  var a = ['a','b','c','d','e','f','g','h']
-
-  a.forEach(i => Logger.log(`Got the item ${i}`))
-
-  return Logger.getLog()
-}

@@ -19,7 +19,7 @@ export function uniqueConcat_(a: any[], b: any[]): any[] {
   return a.concat(b.filter(c => a.indexOf(c) < 0))
 }
 
-export function logToSheet_(activeSpreadsheet): void {
+export function logToSheet_(activeSpreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet): void {
   var logSheet = activeSpreadsheet.getSheetByName('Logs')
   if(logSheet) {
     activeSpreadsheet.deleteSheet(logSheet)
