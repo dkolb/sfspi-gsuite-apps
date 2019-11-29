@@ -1,14 +1,23 @@
 {
   "name": "sfspi-gsuite-sheets",
-  "version": "1.0.0",
-  "description": "",
-  "main": "Code.js",
+  "version": "0.0.2",
+  "description": "Reporting tools for the House Records sheets.",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "push": "clasp push",
+    "watch": "clasp watch"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "David Kolb <david.kolb@krinchan.com>",
+  "license": "MIT",
   "dependencies": {
-    "@types/google-apps-script": "^1.0.7"
-  }
+    "@types/google-apps-script": "^1.0.7",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2",
+    "watch": "^1.0.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "repository": "git@github.com:dkolb/sfspi-gsuite-apps.git",
+  "private": false
 }

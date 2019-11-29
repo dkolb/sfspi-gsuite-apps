@@ -17,7 +17,7 @@ const VERSION = '0.0.2'
 function onOpen(e) {
   var spreadsheet = SpreadsheetApp.getUi()
     .createMenu('SFSPI Functions')
-    .addItem('Update Forms with Active Members...', 'updateFormsWithActiveMembers')
+    .addItem('Update Forms with Active Members', 'updateFormsWithActiveMembers')
     .addItem('Generate Attendance Report', 'generateAttendanceReport')
     .addItem('Create Detailed Attendance Report', 'generateDetailedAttendanceReport')
     .addToUi()
@@ -68,12 +68,7 @@ function generateAttendanceReport(e) {
       }
     }
   }
-  
-  //One year ago, beginning of month.
-  var lastYear = new Date()
-  lastYear.setFullYear(lastYear.getFullYear() - 1)
-  lastYear.setDate(1)
-  
+
   //Populate report with relevant events.
   events.forEach(event => {
     uniqueConcat_(event.pointMembers, event.attendees)
