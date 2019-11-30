@@ -192,11 +192,7 @@ function generateDetailedAttendanceReport() {
         tr.appendTableCell(meeting.meetingType)
       })
   })
-
-  /*body.appendPageBreak()
-  body.appendParagraph('LOGGING').setHeading(DocumentApp.ParagraphHeading.HEADING1)
-  body.appendParagraph(Logger.getLog())*/
-
+  
   //Setup the modal.
   var modalContent = HtmlService.createTemplateFromFile('report-ready-modal')
   modalContent.docUrl = document.getUrl()
