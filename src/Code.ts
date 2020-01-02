@@ -9,10 +9,12 @@ import {
 
 import {
   getSettings_,
-  uniqueConcat_
+  uniqueConcat_,
+  logToSheet_,
+  nullableDateComparator_
 } from './utilities'
 
-const VERSION = '0.0.2'
+const VERSION = '0.0.3'
 
 function onOpen(e) {
   var spreadsheet = SpreadsheetApp.getUi()
@@ -20,6 +22,7 @@ function onOpen(e) {
     .addItem('Update Forms with Active Members', 'updateFormsWithActiveMembers')
     .addItem('Generate Attendance Report', 'generateAttendanceReport')
     .addItem('Create Detailed Attendance Report', 'generateDetailedAttendanceReport')
+    //.addItem('Fix imported names', 'fixNames')
     .addToUi()
 }
 
@@ -118,8 +121,12 @@ function generateDetailedAttendanceReport() {
   var body = document.getBody()
   
   var members = getActiveMembers_(ss)
-  var meetings = getReportMeetings_(ss)
-  var events = getReportEvents_(ss).sort((a, b) =>  b.date.getTime() - a.date.getTime())
+  var meetings = getReportMeetings_(ss).sort(
+    (a, b) => nullableDateComparator_(a.date, b.date)
+  )
+  var events = getReportEvents_(ss).sort(
+    (a, b) => nullableDateComparator_(a.date, b.date)
+  )
   
   body.appendParagraph('Attendance Report').setHeading(DocumentApp.ParagraphHeading.HEADING1)
 
@@ -203,4 +210,35 @@ function generateDetailedAttendanceReport() {
 
   //Show the modal.
   ui.showModalDialog(modalContent.evaluate(), 'Document Ready')
+}
+
+function fixNames(e) {
+  var range = SpreadsheetApp.getActiveRange();
+  var values = range.getValues();
+  var members = getMembers_(SpreadsheetApp.getActiveSpreadsheet())
+
+  var newValues = values.map(row => {
+    if(row && row[0]) {
+      return row.map(cell => {
+        if(cell) {
+          var unfixed = cell.split(/, */);
+          Logger.log(`Unfixed: '${unfixed}'`)
+          unfixed = unfixed.map(name => {
+            var found = members.filter(m => m.pseudonym.indexOf(name) > -1)
+            return found.length > 0 ? found[0].pseudonym : name
+          })
+          Logger.log(`Unfixed after map: '${unfixed}'`)
+          return unfixed.join(',')
+        } else {
+          return cell
+        }
+      })
+    } else {
+      return row
+    }
+  })
+
+  Logger.log(`New Values: ${JSON.stringify(newValues)}`)
+
+  range.setValues(newValues);
 }

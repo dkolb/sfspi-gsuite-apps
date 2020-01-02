@@ -29,3 +29,9 @@ export function logToSheet_(activeSpreadsheet: GoogleAppsScript.Spreadsheet.Spre
   
   logSheet.getRange("A1").setValue(Logger.getLog())
 }
+
+export function nullableDateComparator_(a?: Date, b?: Date): number {
+  var aTime = a != null ? a.getTime() : 0
+  var bTime = b != null ? b.getTime() : 0
+  return aTime - bTime
+}
