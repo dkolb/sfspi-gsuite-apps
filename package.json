@@ -11,12 +11,12 @@
   "author": "David Kolb <david.kolb@krinchan.com>",
   "license": "MIT",
   "dependencies": {
-    "@types/google-apps-script": "^1.0.7",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.2",
+    "@types/google-apps-script": "^1.0.11",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3",
     "watch": "^1.0.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   },
   "repository": "git@github.com:dkolb/sfspi-gsuite-apps.git",
   "private": false
